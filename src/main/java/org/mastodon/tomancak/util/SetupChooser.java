@@ -12,32 +12,23 @@ public class SetupChooser
 extends DynamicCommand
 {
 	@Parameter(required = false, persist = false)
-	String[] setupViews = {"hi","ewq"};
+	private String[] setupViews = null;
 	//
-	@Parameter(label = "Which one: ", initializer = "mySetChoices",
-	           choices = {} )
+	@Parameter(label = "Which one: ",
+	           initializer = "mySetChoices", choices = {} )
 	public String setupView = "";
 
 	void mySetChoices()
 	{
-		System.out.println("mySetChoices is called...");
-
-		/*
-		final MutableModuleItem<String> i = getInfo().getMutableInput("setupView", String.class);
-		i.setChoices(Arrays.asList(setupViews));
-		*/
+		if (setupViews == null)
+			throw new IllegalArgumentException("Provide an initial String[] of 'setupViews' to run this plugin.");
 
 		getInfo().getMutableInput("setupView", String.class).setChoices(Arrays.asList(setupViews));
+		this.unresolveInput("a");
 	}
 
-	@Parameter(label = "Which number: ")
-	public int a=10;
-
-	public SetupChooser()
-	{
-		//empty for now...
-		System.out.println("SetupChoose c'tor()");
-	}
+	@Parameter(label = "Which number: ", persist = false)
+	public int a = 0;
 
 	@Parameter
 	Model model;
