@@ -221,6 +221,7 @@ public class TomancakPlugins extends AbstractContextual implements MastodonPlugi
 	{
 		System.out.println("testSetupChooser()...");
 		this.getContext().getService(CommandService.class).run(SetupChooser.class, true,
+				"model", pluginAppModel.getAppModel().getModel(),
 				"setupViews", new String[] {"hellow","ewq","das","ccz"});
 	}
 

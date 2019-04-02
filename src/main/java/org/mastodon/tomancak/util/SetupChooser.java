@@ -1,5 +1,6 @@
 package org.mastodon.tomancak.util;
 
+import org.mastodon.revised.model.mamut.Model;
 import org.scijava.command.Command;
 import org.scijava.command.DynamicCommand;
 import org.scijava.plugin.Plugin;
@@ -10,14 +11,6 @@ import java.util.Arrays;
 public class SetupChooser
 extends DynamicCommand
 {
-    /*
-	public Vector<String> setupViews = new Vector<>(50);
-	{
-		setupViews.add("qwe");
-		setupViews.add("asd");
-		setupViews.add("zxc");
-	}
-	*/
 	@Parameter(required = false, persist = false)
 	String[] setupViews = {"hi","ewq"};
 	//
@@ -46,6 +39,9 @@ extends DynamicCommand
 		System.out.println("SetupChoose c'tor()");
 	}
 
+	@Parameter
+	Model model;
+
 	@Override
 	public void run()
 	{
@@ -53,5 +49,7 @@ extends DynamicCommand
 		System.out.println("chose a="+a);
 		for (String s : setupViews)
 			System.out.println(s);
+		System.out.println("model: "+model.getSpatioTemporalIndex().getSpatialIndex(0).size());
+		System.out.println("model: "+model.getSpatioTemporalIndex().getSpatialIndex(1).size());
 	}
 }
