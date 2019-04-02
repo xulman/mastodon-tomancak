@@ -17,6 +17,7 @@ import org.mastodon.revised.mamut.Mastodon;
 import org.mastodon.revised.model.mamut.Model;
 import org.mastodon.revised.ui.keymap.CommandDescriptionProvider;
 import org.mastodon.revised.ui.keymap.CommandDescriptions;
+import org.mastodon.tomancak.util.SetupChooser;
 import org.scijava.AbstractContextual;
 import org.scijava.Context;
 import org.scijava.plugin.Plugin;
@@ -116,7 +117,7 @@ public class TomancakPlugins extends AbstractContextual implements MastodonPlugi
 		flipDescendantsAction = new RunnableAction( FLIP_DESCENDANTS, this::flipDescendants );
 		copyTagAction = new RunnableAction( COPY_TAG, this::copyTag );
 		interpolateSpotsAction = new RunnableAction( INTERPOLATE_SPOTS, this::interpolateSpots );
-		importFromImagesAction = new RunnableAction( IMPORT_FROM_IMAGES, this::importFromImages );
+		importFromImagesAction = new RunnableAction( IMPORT_FROM_IMAGES, this::testSetupChooser );
 
 		exportThreeColumnPointsPerTimepointsAction = new RunnableAction( POINTS_EXPORT_3COLS, this::exportThreeColumnPointsPerTimepoints );
 		importThreeColumnPointsAction              = new RunnableAction( POINTS_IMPORT_3COLS, this::importThreeColumnPoints );
@@ -214,6 +215,13 @@ public class TomancakPlugins extends AbstractContextual implements MastodonPlugi
 			final Model model = pluginAppModel.getAppModel().getModel();
 			InterpolateMissingSpots.interpolate( model );
 		}
+	}
+
+	private void testSetupChooser()
+	{
+		System.out.println("testSetupChooser()...");
+		this.getContext().getService(CommandService.class).run(SetupChooser.class, true,
+				"setupViews", new String[] {"hellow","ewq","das","ccz"});
 	}
 
 	private void importFromImages()
